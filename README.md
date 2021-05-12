@@ -4,11 +4,11 @@ This is a unity project that deploys to both the Android phone and the Hololens.
 
 
 
-### Basic Flow & Pipelining
+## Basic Flow & Pipelining
 
 The Android device hosts the server. The server will automatically start when the Android app is started. The Hololens is the client, and will also automatically try and join the server when the Hololens is started. **Please start the Android app before the Hololens app to ensure the server is running before the client attempts to connect.**
 
-#### Raycasting & Transformations Math
+### Raycasting & Transformations Math
 
 a) When we tap the Android screen, the Android calculates 3 things: 
 
@@ -29,11 +29,11 @@ d) Once the Android receives the intersection point data from the Hololens, it a
 
 
 
-### Building & Deploying
+## Building & Deploying
 
 There is only one scene in the project: 0-Main. Before you build either Android or Hololens, **make sure to change the IP address to be your local network.** This is changed by going to the NetworkManager scene object --> Basic Net Manager Component --> Network Address
 
-#### Android
+### Android
 
 To build and deploy to the Android, follow these steps:
 
@@ -44,7 +44,7 @@ To build and deploy to the Android, follow these steps:
 5. Once done, the app will automatically start if/when the phone is unlocked. You might have to approve it the first time. 
 6. If the app has trouble deploying to the phone, make sure you have developer mode turned on in your Android device. 
 
-#### Hololens
+### Hololens
 
 1. Make sure the target platform in Build Settings is set to Universal Windows Platform. 
 
@@ -66,15 +66,15 @@ To build and deploy to the Android, follow these steps:
 
 
 
-### Important Scripts & Components
+## Important Scripts & Components
 
-#### ARCamera (Scene Object)
+### ARCamera (Scene Object)
 
 The AR Camera is our main camera so Hololens and Android can track image targets. The Camera must have a black solid color as the background for the Hololens. Attached to the ARCamera is a Vuforia Behavior Script, which sets the configs for Vuforia. More details on Vuforia configs is in the configs settings below. 
 
 
 
-#### Image Target (Scene Object)
+### Image Target (Scene Object)
 
 This is the picture that is actually being tracked. Right now, it's a picture of the Hunger Games book. You can change the image target picture by making a Vuforia license and database, changing the license in the Vuforia configs, and using a different picture from your database for the image target.  **Everything that is tracked by the image target must be a child of the image target**. Currently, the image target tracks a sphere (so we know the target is working), and a target marker.
 
@@ -82,7 +82,7 @@ The ImageTarget object has a Ray Cast Controller script attached to it. This is 
 
 
 
-#### Ray Cast Controller (Script)
+### Ray Cast Controller (Script)
 
 This script handles all the raycasting and message sending for the Hololens and Android. Essentially, this is the script that does most of the work of this app. 
 
@@ -96,27 +96,27 @@ This script handles all the raycasting and message sending for the Hololens and 
 
 
 
-#### Target (Scene Object)
+### Target (Scene Object)
 
 Target is a child of the image target. Initially, it starts as inactive. Only when the user clicks on the Android device is the target set as active and its position is set to be where the user tapped. 
 
 
 
-#### Spatial Manager (Scene Object)
+### Spatial Manager (Scene Object)
 
 This is in charge of building and visualizing the spatial mesh on the Hololens. The Spatial Mapping Renderer component is in charge of visualizing this mesh. In order to do so, you have to set the Render State to Visualization. Otherwise, if you don't want to see the generated mesh, set it to None. The Spatial Mapping Collider is in charge of making objects to collide against when we raycast. It's important to have the Mesh Layer be a custom layer so that in the Ray Cast Controller script we can raycast against only this layer. **In order for this feature to work, spatial perception mush be turn on in the build settings.**
 
 
 
-#### Network Manager (Scene Object)
+### Network Manager (Scene Object)
 
 This is in charge of the actual client and server work. You would set the ip here, and instantiate player prefabs. **Currently, the player prefab is just a dummy because it doesn't need to do anything**. This has a lot of the scripts given to us by the Mirror Network plugin, but right now it's pretty basic. 
 
 
 
-### Unity Configs
+## Unity Configs
 
-#### Android
+### Android
 
 ![](Photos/aconfig1.png)
 
@@ -124,7 +124,7 @@ This is in charge of the actual client and server work. You would set the ip her
 
 ![](Photos/aconfig3.png)
 
-#### Hololens
+### Hololens
 
 ![](Photos/hconfig1.png)
 
@@ -134,11 +134,11 @@ This is in charge of the actual client and server work. You would set the ip her
 
 ![](Photos/hconfig3.png)
 
-#### Image Target
+### Image Target
 
 ![](Photos/target.jpg)
 
-### Future Work
+## Future Work
 
 - Currently, there is only one marker (target) and it's set based on where you tap. In the future, it would be good to display a series of geometry based on the fingerpress path, allowing you to draw in the 3D space. 
 - Only the Android sees the marker. In the future, the Hololens would also need to see the marker and update its position. 

@@ -116,6 +116,8 @@ This is in charge of the actual client and server work. You would set the ip her
 
 ## Unity Configs
 
+This project uses two plugins: Vuforia and Mirror Networking
+
 ### Android
 
 ![](Photos/aconfig1.png)
